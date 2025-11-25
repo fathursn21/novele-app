@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
-import id.ac.pnm.novele.viewmodel.NovelViewModel
+import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback

@@ -1,4 +1,4 @@
-package id.ac.pnm.novele.model
+package id.ac.pnm.novele.data.model.novel
 
 data class NovelData(
     var id : String,

@@ -1,10 +1,10 @@
-package id.ac.pnm.novele.viewmodel
+package id.ac.pnm.novele.viewmodel.novel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.ac.pnm.novele.model.NovelData
-import id.ac.pnm.novele.model.NovelRepository
+import id.ac.pnm.novele.data.model.novel.NovelData
+import id.ac.pnm.novele.data.repository.novel.NovelRepository
 
 class NovelViewModel : ViewModel() {
 
