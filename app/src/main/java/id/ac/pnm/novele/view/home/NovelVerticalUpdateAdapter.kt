@@ -8,7 +8,7 @@
     import androidx.recyclerview.widget.DiffUtil
     import androidx.recyclerview.widget.RecyclerView
     import id.ac.pnm.novele.R
-    import id.ac.pnm.novele.model.NovelData
+    import id.ac.pnm.novele.data.model.novel.NovelData
 
 
     class NovelVerticalUpdateAdapter :

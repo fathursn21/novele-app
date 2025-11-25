@@ -1,18 +1,18 @@
-package id.ac.pnm.novele
+package id.ac.pnm.novele.view
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.view.View
-import android.widget.Toast
-import androidx.navigation.fragment.NavHostFragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import id.ac.pnm.novele.R
 
 class HomeActivity : AppCompatActivity() {
 
@@ -42,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavView.setupWithNavController(navController)
         cekPosisi()
+
+
     }
     private fun cekPosisi() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -49,5 +51,10 @@ class HomeActivity : AppCompatActivity() {
 
             Toast.makeText(this, "$fragmentName", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // tempat untuk mendefinisikan variabel tetap mirip defin di php jadi nanti tinggal manggil kelas.variabel
+    companion object {
+        const val DISPLAY_NAME = "DISPLAY_NAME"
     }
 }
