@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">novele</string>
+    <string name="title_novel_update">Update</string>
+    <string name="title_novel_populer">Novel Populer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cd_cover_novel">Cover Novel</string>
+    <string name="chapter">Chapter %d</string>
+    <string name="jam">%d jam</string>
+    <string name="hint_search">Cari novel kesukaanmu...</string>
+    <string name="cd_ic_search">Search Icon</string>
+    <string name="cd_ic_cancel_search">Cancel Search Icon</string>
+    <string name="cd_ic_filter_search">Filter Search Icon</string>
+    <string name="cd_ic_more_vertical_icon">More Vertical</string>
+    <string name="title_library_fragment">Library</string>
+    <string name="title_profile_fragment">Profile</string>
+    <string name="title_home_fragment">Home</string>
+
+
+
+
 </resources>
