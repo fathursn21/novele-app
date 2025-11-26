@@ -49,10 +49,7 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        textViewDisplayName.text = displayName
-    }
+
 
 
 
@@ -77,6 +74,7 @@ class ProfileFragment : Fragment() {
 //    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        textViewDisplayName.text = displayName
     }
 
 }
