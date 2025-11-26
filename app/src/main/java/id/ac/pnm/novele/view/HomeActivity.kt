@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    // tempat untuk mendefinisikan variabel tetap mirip defin di php jadi nanti tinggal manggil kelas.variabel
+    // tempat untuk mendefinisikan variabel tetap mirip define di php jadi nanti tinggal manggil kelas.variabel
     companion object {
         const val DISPLAY_NAME = "DISPLAY_NAME"
     }
