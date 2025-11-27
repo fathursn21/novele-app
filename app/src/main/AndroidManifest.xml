@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Novele">
         <activity
+            android:name=".view.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login">
@@ -21,12 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
