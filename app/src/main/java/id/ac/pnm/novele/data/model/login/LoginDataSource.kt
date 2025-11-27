@@ -11,7 +11,7 @@ class LoginDataSource {
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
             // TODO: handle loggedInUser authentication
-//            if( username == "a" && password == "a"){
+//            if( username == "@" && password == "a"){
                 val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "admin")
                 return Result.Success(fakeUser)
 //            } else {
