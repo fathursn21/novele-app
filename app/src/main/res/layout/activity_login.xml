@@ -131,7 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="#00A6CB"
-            android:text="Sign In" />
+            android:text="Sign In"
+            android:clickable="true"
+            android:focusable="true"/>
+
     </LinearLayout>
 
 

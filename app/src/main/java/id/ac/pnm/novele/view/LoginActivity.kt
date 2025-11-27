@@ -35,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
         val login = binding.buttonLogin
         val loading = binding.loading
 
+        val register = binding.textViewSigInLogin
+
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
@@ -98,6 +100,10 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+
+            register.setOnClickListener {
+                loginRegister()
+            }
         }
     }
 
@@ -107,6 +113,11 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("DISPLAY_NAME", displayName)
         startActivity(intent)
         finish()
+    }
+
+    private fun loginRegister(){
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
