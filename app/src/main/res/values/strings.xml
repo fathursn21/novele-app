@@ -26,5 +26,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="register_failed">"register failed"</string>
 
+    <string name="title_diary_fragment">Diary</string>
+    <string name="textViewJudulKaryaku">Karyaku</string>
+    <string name="lihat_semua">Lihat semua</string>
 
 </resources>

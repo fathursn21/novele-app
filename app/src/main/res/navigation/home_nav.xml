@@ -20,4 +20,9 @@
         android:name="id.ac.pnm.novele.view.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="id.ac.pnm.novele.view.diary.DiaryFragment"
+        android:label="fragment_diary"
+        tools:layout="@layout/fragment_diary" />
 </navigation>

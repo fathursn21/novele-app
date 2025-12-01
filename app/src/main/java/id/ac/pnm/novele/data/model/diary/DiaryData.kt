@@ -1,9 +1,9 @@
-package id.ac.pnm.novele.data.model.novel
+package id.ac.pnm.novele.data.model.diary
 
-data class NovelData(
+data class DiaryData(
     var id : String,
-    var coverNovel : Int,
-    var judulNovel : String,
+    var coverDiary : Int,
+    var judulDiary : String,
     var chapterBaru : Int,
     var chapterLama : Int,
     var waktuChapterBaru : Int,

@@ -30,7 +30,7 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val novelViewModel: NovelViewModel = ViewModelProvider(this)[NovelViewModel::class.java]
-        val libraryAdapter = LibraryAdapter()
+        val libraryAdapter = LibraryAdapterHorizontal()
 
         recyclerViewLibrary.apply {
             layoutManager = GridLayoutManager(activity, 2)
@@ -40,9 +40,10 @@ class LibraryFragment : Fragment() {
         novelViewModel.novelData.observe(viewLifecycleOwner){listNovel ->
             if (listNovel.isEmpty()){
                 libraryAdapter.adapterListenerData(emptyList())
+            } else {
+                libraryAdapter.adapterListenerData(listNovel.take(5))
             }
 
-            libraryAdapter.adapterListenerData(listNovel.take(5))
         }
         novelViewModel.getNovelData()
 
