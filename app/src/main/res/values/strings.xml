@@ -23,6 +23,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >3 characters</string>
     <string name="login_failed">"Login failed"</string>
-
+    <string name="title_diary_fragment">Diary</string>
+    <string name="textViewJudulKaryaku">Karyaku</string>
+    <string name="lihat_semua">Lihat semua</string>
 
 </resources>

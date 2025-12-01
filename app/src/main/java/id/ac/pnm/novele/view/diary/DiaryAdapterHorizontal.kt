@@ -1,6 +1,5 @@
-package id.ac.pnm.novele.view.library
+package id.ac.pnm.novele.view.diary
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,56 +7,52 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
-import id.ac.pnm.novele.data.model.novel.NovelData
+import id.ac.pnm.novele.data.model.diary.DiaryData
 
-class LibraryAdapter : RecyclerView.Adapter<LibraryAdapter.LibraryViewHolder>() {
-    private var listNovelLibrary: List<NovelData> = emptyList()
+class DiaryAdapterHorizontal : RecyclerView.Adapter<DiaryAdapterHorizontal.DiaryHorizontalViewHolder>() {
+    private var listDiary: List<DiaryData> = emptyList()
 
-    class  LibraryViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val imageViewCoverNovelLibrary : ImageView = view.findViewById(R.id.imageViewCoverNovelLibrary)
+    class  DiaryHorizontalViewHolder(view : View) : RecyclerView.ViewHolder(view){
+        val imageViewCoverNovelHorizontal = view.findViewById<ImageView>(R.id.imageViewCoverNovelHorizontal)
 
-        fun bind(novel: NovelData) {
-            imageViewCoverNovelLibrary.setImageResource(novel.coverNovel)
+        fun bind(novel : DiaryData){
+            imageViewCoverNovelHorizontal.setImageResource(novel.coverDiary)
         }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): LibraryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_library,
-            parent,
-            false)
-        return LibraryViewHolder(view)
+    ): DiaryHorizontalViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_home_horizontal_novel, parent, false)
+        return DiaryHorizontalViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: LibraryViewHolder,
+        holder: DiaryHorizontalViewHolder,
         position: Int
     ) {
-        val row = listNovelLibrary[position]
+        val row = listDiary[position]
         holder.bind(row)
     }
 
     override fun getItemCount(): Int {
-        Log.d("LibraryAdapter", "itemCount = ${listNovelLibrary.size}")
-        return listNovelLibrary.size
+        return listDiary.size
     }
 
-    fun adapterListenerData(newListNovelLibrary: List<NovelData>) {
+    fun adapterListenerData(newListNovelLibrary: List<DiaryData>) {
         val diffResult = DiffUtil.calculateDiff(
-            ListNovelDiffCallback(this.listNovelLibrary, newListNovelLibrary)
+            ListDiaryDiffCallback(this.listDiary, newListNovelLibrary)
         )
 
-        this.listNovelLibrary = newListNovelLibrary
+        this.listDiary = newListNovelLibrary
 
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class ListNovelDiffCallback(
-        private val oldList: List<NovelData>,
-        private val newList: List<NovelData>
+    class ListDiaryDiffCallback(
+        private val oldList: List<DiaryData>,
+        private val newList: List<DiaryData>
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldList.size
