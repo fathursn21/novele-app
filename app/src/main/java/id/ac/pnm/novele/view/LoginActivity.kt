@@ -15,13 +15,13 @@ import android.widget.Toast
 import id.ac.pnm.novele.databinding.ActivityLoginBinding
 
 import id.ac.pnm.novele.R
-import id.ac.pnm.novele.data.model.login.LoggedInUserView
-import id.ac.pnm.novele.viewmodel.login.LoginViewModel
-import id.ac.pnm.novele.viewmodel.login.LoginViewModelFactory
+import id.ac.pnm.novele.data.model.auth.LoggedInUserView
+import id.ac.pnm.novele.viewmodel.login.AuthViewModel
+import id.ac.pnm.novele.viewmodel.login.AuthViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var authViewModel: AuthViewModel
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +37,9 @@ class LoginActivity : AppCompatActivity() {
 
         val register = binding.textViewSigInLogin
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
+        authViewModel = ViewModelProvider(this, AuthViewModelFactory())[AuthViewModel::class.java]
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
+        authViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
+        authViewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
 
             loading.visibility = View.GONE
@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         username.afterTextChanged {
-            loginViewModel.loginDataChanged(
+            authViewModel.loginDataChanged(
                 username.text.toString(),
                 password.text.toString()
             )
@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
 
         password.apply {
             afterTextChanged {
-                loginViewModel.loginDataChanged(
+                authViewModel.loginDataChanged(
                     username.text.toString(),
                     password.text.toString()
                 )
@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
+                        authViewModel.login(
                             username.text.toString(),
                             password.text.toString()
                         )
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                authViewModel.login(username.text.toString(), password.text.toString())
             }
 
             register.setOnClickListener {
@@ -118,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loginRegister(){
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

@@ -2,21 +2,22 @@ package id.ac.pnm.novele.viewmodel.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import id.ac.pnm.novele.data.model.login.LoginDataSource
-import id.ac.pnm.novele.data.repository.login.LoginRepository
+import id.ac.pnm.novele.data.model.auth.AuthDataSource
+import id.ac.pnm.novele.data.model.user.UserDataSource
+import id.ac.pnm.novele.data.repository.auth.AuthRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
  * Required given LoginViewModel has a non-empty constructor
  */
-class LoginViewModelFactory : ViewModelProvider.Factory {
+class AuthViewModelFactory : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(
-                loginRepository = LoginRepository(
-                    dataSource = LoginDataSource()
+        if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
+            return AuthViewModel(
+                authRepository = AuthRepository(
+                    dataSource = AuthDataSource(userDataSource = UserDataSource)
                 )
             ) as T
         }
