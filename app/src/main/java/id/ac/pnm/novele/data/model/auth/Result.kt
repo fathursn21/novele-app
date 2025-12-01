@@ -1,4 +1,4 @@
-package id.ac.pnm.novele.data.model.login
+package id.ac.pnm.novele.data.model.auth
 
 /**
  * A generic class that holds a value with its loading status.

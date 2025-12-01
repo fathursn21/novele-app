@@ -1,4 +1,4 @@
-package id.ac.pnm.novele.data.model.login
+package id.ac.pnm.novele.data.model.auth
 
 /**
  * Data validation state of the login form.

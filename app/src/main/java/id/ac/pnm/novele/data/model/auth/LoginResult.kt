@@ -1,4 +1,4 @@
-package id.ac.pnm.novele.data.model.login
+package id.ac.pnm.novele.data.model.auth
 
 /**
  * Authentication result : success (user details) or error message.

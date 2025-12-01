@@ -1,13 +1,21 @@
 package id.ac.pnm.novele.view.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import id.ac.pnm.novele.R
+import id.ac.pnm.novele.data.model.user.UserDataSource
 import id.ac.pnm.novele.view.HomeActivity
+import id.ac.pnm.novele.view.LoginActivity
+import id.ac.pnm.novele.viewmodel.login.AuthViewModel
+import id.ac.pnm.novele.viewmodel.login.AuthViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,8 +32,9 @@ class ProfileFragment : Fragment() {
 //    private var param1: String? = null
 //    private var param2: String? = null
 
-    private var displayName : String? = null
-    private lateinit var textViewDisplayName : TextView
+    private var displayName: String? = null
+    private lateinit var layoutLogout: LinearLayout
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +45,9 @@ class ProfileFragment : Fragment() {
         //getExtra dari LoginActivity
         val getExtraDisplayName = requireActivity().intent.getStringExtra(HomeActivity.DISPLAY_NAME)
         displayName = getExtraDisplayName
+        authViewModel = ViewModelProvider(requireActivity(), AuthViewModelFactory())
+            .get(AuthViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -44,15 +56,12 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        textViewDisplayName = view.findViewById(R.id.textViewDisplayName)
+        layoutLogout = view.findViewById(R.id.layoutLogout)
         return view
     }
 
 
-
-
-
-//    companion object {
+    //    companion object {
 //        /**
 //         * Use this factory method to create a new instance of
 //         * this fragment using the provided parameters.
@@ -73,7 +82,22 @@ class ProfileFragment : Fragment() {
 //    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textViewDisplayName.text = displayName
+        //pindah ke halaman login
+        layoutLogout.setOnClickListener {
+            logout()
+        }
     }
 
+    private fun logout() {
+        //menghapus sesi login, fungsinya ada di file AuthViewModel
+        authViewModel.logout()
+
+        //untuk pindah ke halaman login
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
+
+        //membersihkan task yang sebelumnya sambil membuka task baru untuk pindah activity
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        //eksekusi intentnya
+        startActivity(intent)
+    }
 }
