@@ -43,7 +43,6 @@ class HomeActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController)
         cekPosisi()
 
-
     }
     private fun cekPosisi() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
