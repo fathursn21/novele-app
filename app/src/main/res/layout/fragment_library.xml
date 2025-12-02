@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageViewSearchLibraryIcon"
+                android:id="@+id/imageViewLibrarySearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -29,11 +29,11 @@
                 android:src="@drawable/ic_baseline_search_24"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageViewFilterLibrarySearchIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLibraryFilterSearchIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewCancelLibrarySearchIcon"
+                android:id="@+id/imageViewLibraryCancelSearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewFilterLibrarySearchIcon"
+                android:id="@+id/imageViewLibraryFilterSearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -55,11 +55,11 @@
                 android:src="@drawable/ic_baseline_filter_list_24"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageViewMoreLibraryVerticalIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLibraryMoreVerticalIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewMoreLibraryVerticalIcon"
+                android:id="@+id/imageViewLibraryMoreVerticalIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -73,7 +73,7 @@
 
 
             <TextView
-                android:id="@+id/textViewHome"
+                android:id="@+id/textViewLibrary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_library_fragment"
@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextSearchInput"
+                android:id="@+id/editTextLibrarySearchInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -94,7 +94,7 @@
                 android:inputType="text"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageViewCancelLibrarySearchIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLibraryCancelSearchIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
