@@ -30,7 +30,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@id/imageViewFilterSearchIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewMoreVerticalIcon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -44,19 +44,6 @@
                 android:focusable="true"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageViewFilterSearchIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_baseline_filter_list_24"
-                android:contentDescription="@string/cd_ic_filter_search"
-                android:clickable="true"
-                android:focusable="true"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@id/imageViewMoreVerticalIcon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -75,7 +62,7 @@
 
 
             <TextView
-                android:id="@+id/textViewHome"
+                android:id="@+id/textViewLibrary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_home_fragment"
