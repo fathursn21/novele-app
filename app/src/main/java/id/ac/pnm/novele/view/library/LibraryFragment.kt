@@ -107,7 +107,7 @@ class LibraryFragment : Fragment() {
                 false
             }
         }
-
+        //adapter
         recyclerViewLibrary.apply {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = libraryAdapter
@@ -135,7 +135,7 @@ class LibraryFragment : Fragment() {
             }
         }
 
-        //ambil daftar novelnya
+        //ambil daftar novelnya biar ga kosong
         novelViewModel.getNovelData()
     }
     private fun tutupSearch(){

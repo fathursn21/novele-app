@@ -10,7 +10,9 @@ import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.novel.NovelData
 
 
-class NovelHorizontalAdapter :
+class NovelHorizontalAdapter(
+    private val onItemClick: (String) -> Unit
+) :
     RecyclerView.Adapter<NovelHorizontalAdapter.NovelViewHolder>() {
 
     private var daftarNovelHorizontal: List<NovelData> = emptyList()
@@ -38,6 +40,9 @@ class NovelHorizontalAdapter :
     override fun onBindViewHolder(holder: NovelViewHolder, position: Int) {
         val novel = daftarNovelHorizontal[position]
         holder.bind(novel)
+        holder.itemView.setOnClickListener {
+            onItemClick(novel.id)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -45,8 +45,7 @@ class ProfileFragment : Fragment() {
         //getExtra dari LoginActivity
         val getExtraDisplayName = requireActivity().intent.getStringExtra(HomeActivity.DISPLAY_NAME)
         displayName = getExtraDisplayName
-        authViewModel = ViewModelProvider(requireActivity(), AuthViewModelFactory())
-            .get(AuthViewModel::class.java)
+        authViewModel = ViewModelProvider(requireActivity(), AuthViewModelFactory())[AuthViewModel::class.java]
 
     }
 
