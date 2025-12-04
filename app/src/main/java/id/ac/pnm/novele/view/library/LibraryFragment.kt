@@ -1,6 +1,7 @@
 package id.ac.pnm.novele.view.library
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
+import id.ac.pnm.novele.view.DetailActivity
+import id.ac.pnm.novele.view.home.NovelVerticalUpdateAdapter
 import id.ac.pnm.novele.viewmodel.SearchViewModel
 import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 
@@ -66,7 +69,11 @@ class LibraryFragment : Fragment() {
         novelViewModel = ViewModelProvider(requireActivity())[NovelViewModel::class.java]
         searchViewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
 
-        libraryAdapter = LibraryAdapterVertical()
+        libraryAdapter = LibraryAdapterVertical { id ->
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
+        }
 
         imageViewLibrarySearchIcon.setOnClickListener {
             //imageView
