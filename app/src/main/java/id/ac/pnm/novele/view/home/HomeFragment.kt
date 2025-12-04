@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 import android.content.Context
+import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import id.ac.pnm.novele.view.DetailActivity
 import id.ac.pnm.novele.viewmodel.SearchViewModel
 
 class HomeFragment : Fragment() {
@@ -75,13 +77,23 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         textViewNovelUpdate.setText(R.string.title_novel_update)
         textViewNovelPopuler.setText(R.string.title_novel_populer)
+        
         //viewmodelhome memakai requireActivity biar instance di fragment lain sama dengan yang ini
         novelViewModel = ViewModelProvider(requireActivity())[NovelViewModel::class.java]
         //viewmodel untuk search agar datanya tidak dihapus itu aja sih
         searchViewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
-        //adapter
-        novelVerticalUpdateAdapter = NovelVerticalUpdateAdapter()
-        novelHorizontalAdapter = NovelHorizontalAdapter()
+
+        //adapter ngirim paket id novel
+        novelVerticalUpdateAdapter = NovelVerticalUpdateAdapter { id ->
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
+        }
+        novelHorizontalAdapter = NovelHorizontalAdapter{ id ->
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
+        }
 
         imageViewSearchIcon.setOnClickListener {
             //imageView
@@ -143,6 +155,7 @@ class HomeFragment : Fragment() {
                 novelVerticalUpdateAdapter.updateData(emptyList())
             }
         }
+        //ambil daftar novelnya biar ga kosong
         novelViewModel.getNovelData()
     }
 

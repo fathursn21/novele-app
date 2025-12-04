@@ -6,7 +6,7 @@
     <string name="cd_cover_novel">Cover Novel</string>
     <string name="chapter">Chapter %d</string>
     <string name="jam">%d jam</string>
-    <string name="hint_search">Cari novel kesukaanmu...</string>
+    <string name="hint_search">Cari novel kesukaanmu…</string>
     <string name="cd_ic_search">Search Icon</string>
     <string name="cd_ic_cancel_search">Cancel Search Icon</string>
     <string name="cd_ic_filter_search">Filter Search Icon</string>
@@ -14,7 +14,7 @@
     <string name="title_library_fragment">Library</string>
     <string name="title_profile_fragment">Profile</string>
     <string name="title_home_fragment">Home</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_detail_activity">Detail</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_login">Login</string>
