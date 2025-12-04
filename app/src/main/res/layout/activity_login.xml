@@ -46,9 +46,9 @@
         android:id="@+id/textViewEmailUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60sp"
         android:text="Email/Username"
         android:textAlignment="textStart"
-        android:layout_marginTop="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSubHeadingLogin" />
@@ -73,9 +73,9 @@
         android:id="@+id/textViewPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Password"
         android:textAlignment="textStart"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -100,12 +100,14 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_rounded_button_solid"
         android:enabled="false"
         android:text="@string/action_login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -130,10 +132,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textColor="#00A6CB"
-            android:text="Sign In"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:text="Sign In"
+            android:textColor="#00A6CB" />
 
     </LinearLayout>
 
@@ -151,8 +153,6 @@
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
