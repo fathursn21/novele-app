@@ -15,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 import android.content.Context
+import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import id.ac.pnm.novele.view.DetailActivity
+import id.ac.pnm.novele.viewmodel.SearchViewModel
 
 class HomeFragment : Fragment() {
 
@@ -31,13 +35,13 @@ class HomeFragment : Fragment() {
 
     private lateinit var imageViewSearchIcon : ImageView
     private lateinit var imageViewCancelSearchIcon : ImageView
-    private lateinit var imageViewFilterSearchIcon : ImageView
     private lateinit var imageViewMoreVerticalIcon : ImageView
 
 
     private lateinit var novelVerticalUpdateAdapter: NovelVerticalUpdateAdapter
     private lateinit var novelHorizontalAdapter: NovelHorizontalAdapter
     private lateinit var novelViewModel: NovelViewModel
+    private lateinit var searchViewModel: SearchViewModel
 
     //tombok back 2x
     private val onBackPressedCallback = object : OnBackPressedCallback(false) {
@@ -57,12 +61,11 @@ class HomeFragment : Fragment() {
         //textView
         textViewNovelUpdate = view.findViewById(R.id.textViewNovelUpdate)
         textViewNovelPopuler = view.findViewById(R.id.textViewNovelPopuler)
-        textViewHome = view.findViewById(R.id.textViewHome)
+        textViewHome = view.findViewById(R.id.textViewLibrary)
         editTextSearchInput = view.findViewById(R.id.editTextSearchInput)
         //imageView
         imageViewSearchIcon = view.findViewById(R.id.imageViewSearchIcon)
         imageViewCancelSearchIcon = view.findViewById(R.id.imageViewCancelSearchIcon)
-        imageViewFilterSearchIcon = view.findViewById(R.id.imageViewFilterSearchIcon)
         imageViewMoreVerticalIcon = view.findViewById(R.id.imageViewMoreVerticalIcon)
         //tombol back
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
@@ -74,17 +77,28 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         textViewNovelUpdate.setText(R.string.title_novel_update)
         textViewNovelPopuler.setText(R.string.title_novel_populer)
-        //viewmodelhome
-        novelViewModel = ViewModelProvider(this)[NovelViewModel::class.java]
-        //adapter
-        novelVerticalUpdateAdapter = NovelVerticalUpdateAdapter()
-        novelHorizontalAdapter = NovelHorizontalAdapter()
+        
+        //viewmodelhome memakai requireActivity biar instance di fragment lain sama dengan yang ini
+        novelViewModel = ViewModelProvider(requireActivity())[NovelViewModel::class.java]
+        //viewmodel untuk search agar datanya tidak dihapus itu aja sih
+        searchViewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
+
+        //adapter ngirim paket id novel
+        novelVerticalUpdateAdapter = NovelVerticalUpdateAdapter { id ->
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
+        }
+        novelHorizontalAdapter = NovelHorizontalAdapter{ id ->
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
+        }
 
         imageViewSearchIcon.setOnClickListener {
             //imageView
             imageViewSearchIcon.visibility = View.GONE
             imageViewCancelSearchIcon.visibility = View.VISIBLE
-            imageViewFilterSearchIcon.visibility = View.GONE
             imageViewMoreVerticalIcon.visibility = View.GONE
             //textView
             textViewHome.visibility = View.GONE
@@ -101,13 +115,21 @@ class HomeFragment : Fragment() {
         imageViewCancelSearchIcon.setOnClickListener {
             tutupSearch()
         }
-
+        //untuk search
         editTextSearchInput.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                val query = editTextSearchInput.text.toString().trim()
+                if (query.isNotEmpty()) {
+                    searchViewModel.query.value = query
+                    novelViewModel.searchNovel(query)
 
-                // menyembunyikan keyboard biar rapi aja
-                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                    val imm = v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    // menyembunyikan keyboard biar rapi aja
+                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                    //pindah ke libraryfragment pakai bottom_nav tapi lewat kode bukan xml
+                    (requireActivity()).findViewById<BottomNavigationView>(R.id.bottom_nav)
+                        .selectedItemId = R.id.libraryFragment
+                }
                 true
             } else {
                 false
@@ -120,7 +142,7 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL,false)
             adapter = novelHorizontalAdapter
         }
-
+        //belum jadi karena belum tak buatkan LIFO nya atau tumpukannya untuk novel Update
         novelViewModel.novelData.observe(viewLifecycleOwner){ daftarNovel ->
             if (daftarNovel.isNotEmpty()){
                 val daftarNovelHorizontal = daftarNovel.take(5)
@@ -133,7 +155,13 @@ class HomeFragment : Fragment() {
                 novelVerticalUpdateAdapter.updateData(emptyList())
             }
         }
+        //ambil daftar novelnya biar ga kosong
         novelViewModel.getNovelData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchViewModel.query.value = ""
     }
     
     private fun tutupSearch(){
@@ -143,15 +171,14 @@ class HomeFragment : Fragment() {
         //imageView
         imageViewSearchIcon.visibility = View.VISIBLE
         imageViewCancelSearchIcon.visibility = View.GONE
-        imageViewFilterSearchIcon.visibility = View.VISIBLE
         imageViewMoreVerticalIcon.visibility = View.VISIBLE
         //textView
         textViewHome.visibility = View.VISIBLE
-
+        //membersihkan hasil search
+        novelViewModel.clearSearchResult()
         //sama kayak diatas untuk menyembunyikan keyboard kalau masih muncul
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(editTextSearchInput.windowToken, 0)
         onBackPressedCallback.isEnabled = false
     }
-
 }

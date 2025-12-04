@@ -1,4 +1,4 @@
-package id.ac.pnm.novele.data.model.login
+package id.ac.pnm.novele.data.model.auth
 
 /**
  * User details post authentication that is exposed to the UI
