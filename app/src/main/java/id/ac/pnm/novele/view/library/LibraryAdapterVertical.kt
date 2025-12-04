@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.novel.NovelData
 
-class LibraryAdapterVertical :
+class LibraryAdapterVertical(
+    private val onItemClick: (String) -> Unit
+) :
     RecyclerView.Adapter<LibraryAdapterVertical.LibraryViewHolder>() {
 
     private var listNovelLibrary: List<NovelData> = emptyList()
@@ -30,7 +32,11 @@ class LibraryAdapterVertical :
     }
 
     override fun onBindViewHolder(holder: LibraryViewHolder, position: Int) {
-        holder.bind(listNovelLibrary[position])
+        val novel = listNovelLibrary[position]
+        holder.bind(novel)
+        holder.itemView.setOnClickListener {
+            onItemClick(novel.id)
+        }
     }
 
     override fun getItemCount(): Int = listNovelLibrary.size

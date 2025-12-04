@@ -1,6 +1,8 @@
 package id.ac.pnm.novele.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,9 +29,22 @@ class DetailActivity : AppCompatActivity() {
                 .replace(R.id.fragmentContainerDetail, fragment)
                 .commit()
         }
+        val imageViewBackArrowIcon: ImageView = findViewById(R.id.imageViewBackArrowIcon)
+        val imageViewDetailHomeIcon: ImageView = findViewById(R.id.imageViewDetailHomeIcon)
+        //biar mirip kyk nekan tombol back
+        imageViewBackArrowIcon.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        //balik ke home
+        imageViewDetailHomeIcon.setOnClickListener {
+            detailHome()
+        }
     }
-
-    // tempat untuk mendefinisikan variabel tetap mirip define di php jadi nanti tinggal manggil kelas.variabel
+    private fun detailHome(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     companion object {
         const val ID_NOVEL = "ID_NOVEL"
