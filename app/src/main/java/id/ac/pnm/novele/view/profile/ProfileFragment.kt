@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
 //    private var param2: String? = null
 
     private var displayName: String? = null
+    private lateinit var textViewDisplayName: TextView
     private lateinit var layoutLogout: LinearLayout
     private lateinit var authViewModel: AuthViewModel
 
@@ -47,6 +49,7 @@ class ProfileFragment : Fragment() {
         displayName = getExtraDisplayName
         authViewModel = ViewModelProvider(requireActivity(), AuthViewModelFactory())[AuthViewModel::class.java]
 
+
     }
 
     override fun onCreateView(
@@ -56,6 +59,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         layoutLogout = view.findViewById(R.id.layoutLogout)
+        textViewDisplayName = view.findViewById(R.id.textViewDisplayName)
         return view
     }
 
@@ -81,6 +85,9 @@ class ProfileFragment : Fragment() {
 //    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        textViewDisplayName.text = displayName
+
         //pindah ke halaman login
         layoutLogout.setOnClickListener {
             logout()

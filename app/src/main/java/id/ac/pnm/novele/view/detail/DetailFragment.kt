@@ -16,8 +16,6 @@ import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 
 class DetailFragment : Fragment() {
     private var id: String? = null
-//    private var sinopsis: String? = null
-//    private var coverNovel:
     private lateinit var recyclerViewChapterNovelDetail: RecyclerView
     private lateinit var textViewJudulNovelDetail: TextView
     private lateinit var textViewSinopsisNovelDetail: TextView
