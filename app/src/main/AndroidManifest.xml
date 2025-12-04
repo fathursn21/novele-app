@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Novele">
         <activity
+            android:name=".view.DiaryEditorActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
         <activity
             android:name=".view.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
