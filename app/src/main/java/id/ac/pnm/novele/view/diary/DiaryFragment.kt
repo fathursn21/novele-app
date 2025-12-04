@@ -1,20 +1,24 @@
 package id.ac.pnm.novele.view.diary
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
+import id.ac.pnm.novele.view.DiaryEditorActivity
 import id.ac.pnm.novele.viewmodel.diary.DiaryViewModel
-import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 
 class DiaryFragment : Fragment() {
 
     private lateinit var recyclerViewDiaryHorizontal : RecyclerView
+
+    private lateinit var buttonAddDiary : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,12 +29,15 @@ class DiaryFragment : Fragment() {
 
         recyclerViewDiaryHorizontal = view.findViewById<RecyclerView>(R.id.recyclerViewDiaryHorizontal)
 
+        buttonAddDiary = view.findViewById<Button>(R.id.buttonAddDiary)
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // set horizontal slider in diary view in case karyaku
         val diaryViewModel: DiaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
         val diaryAdapterHorizontal = DiaryAdapterHorizontal()
 
@@ -47,6 +54,14 @@ class DiaryFragment : Fragment() {
             }
         }
         diaryViewModel.getDiaryData()
+
+        // set button listener to redirect to view add diary
+        buttonAddDiary.setOnClickListener {
+            val intent = Intent(activity, DiaryEditorActivity::class.java)
+
+            intent.putExtra("is_edit", false)
+            activity?.startActivity(intent)
+        }
         
     }
 }
