@@ -9,18 +9,26 @@ class NovelRepository {
     private lateinit var _allNovels: List<NovelData>
     fun fetchNovelData(): List<NovelData> {
         val chaptersNovelId1 = listOf(
-            ChapterData(1, "Awal Mula Kisah", 12),
-            ChapterData(2, "Misteri Hilangnya Kunci", 11),
-            ChapterData(3, "Pertemuan di Bawah Pohon Tua", 10),
-            ChapterData(4, "Petunjuk dari Surat Rahasia", 9),
-            ChapterData(5, "Pengejaran di Tengah Hutan", 8),
-            ChapterData(6, "Terjebak di Reruntuhan Kuno", 7),
-            ChapterData(7, "Munculnya Sosok Tak Terduga", 6),
-            ChapterData(8, "Negosiasi di Malam Hari", 5),
-            ChapterData(9, "Rencana Pelarian", 4),
-            ChapterData(10, "Pengkhianatan yang Terungkap", 3),
+            ChapterData(12, "Akhir dari Pencarian", 1),
             ChapterData(11, "Menuju Titik Balik", 2),
-            ChapterData(12, "Akhir dari Pencarian", 1)
+            ChapterData(10, "Pengkhianatan yang Terungkap", 3),
+            ChapterData(9, "Rencana Pelarian", 4),
+            ChapterData(8, "Negosiasi di Malam Hari", 5),
+            ChapterData(7, "Munculnya Sosok Tak Terduga", 6),
+            ChapterData(6, "Terjebak di Reruntuhan Kuno", 7),
+            ChapterData(5, "Pengejaran di Tengah Hutan", 8),
+            ChapterData(4, "Petunjuk dari Surat Rahasia", 9),
+            ChapterData(3, "Pertemuan di Bawah Pohon Tua", 10),
+            ChapterData(2, "Misteri Hilangnya Kunci", 11),
+            ChapterData(1, "Awal Mula Kisah", 12)
+        )
+
+        val chaptersNovelId2 = listOf(
+            ChapterData(5, "Pengejaran di Tengah Hutan", 8),
+            ChapterData(4, "Petunjuk dari Surat Rahasia", 9),
+            ChapterData(3, "Pertemuan di Bawah Pohon Tua", 10),
+            ChapterData(2, "Misteri Hilangnya Kunci", 11),
+            ChapterData(1, "Awal Mula Kisah", 12)
         )
 
         val chaptersNovelId2 = listOf(
@@ -188,5 +196,18 @@ class NovelRepository {
             fetchNovelData()
         }
         return _allNovels.find { it.id == id }
+    }
+
+    //mengurutkan novel dengan chapter terbanyak dan tersedikit atau tersedikit ke terbanyak dengan sortBy
+    fun getNovelByChapterCount(ascending: Boolean): List<NovelData> {
+        if (!this::_allNovels.isInitialized) {
+            fetchNovelData()
+        }
+
+        return if (ascending) {
+            _allNovels.sortedBy { it.chapter.size }
+        } else {
+            _allNovels.sortedByDescending { it.chapter.size }
+        }
     }
 }
