@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,8 @@ class DetailDiaryFragment : Fragment() {
     private lateinit var textViewSinopsisNovelDetail : TextView
     private lateinit var textViewJumlahChapterDiaryDetail : TextView
 
+    private lateinit var buttonAddChapterDiary: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +42,8 @@ class DetailDiaryFragment : Fragment() {
         textViewPenulisDiaryDetail = view.findViewById(R.id.textViewPenulisDiaryDetail)
         textViewSinopsisNovelDetail = view.findViewById(R.id.textViewSinopsisNovelDetail)
         textViewJumlahChapterDiaryDetail = view.findViewById(R.id.textViewJumlahChapterDiaryDetail)
+
+        buttonAddChapterDiary = view.findViewById(R.id.buttonAddChapterDiary)
 
         return view
     }
@@ -58,7 +63,6 @@ class DetailDiaryFragment : Fragment() {
 
         if (diaryId != null){
             val rowDiary = DiaryRepository.getDiaryById(diaryId)
-            Log.d("DetailDiary", "rowDiary = $rowDiary")
 
             if (rowDiary != null){
                 val sizeDiary = rowDiary?.chapter?.size ?: 0
@@ -67,6 +71,12 @@ class DetailDiaryFragment : Fragment() {
                 textViewPenulisDiaryDetail.text = rowDiary.penulis
                 textViewSinopsisNovelDetail.text = rowDiary.sinopsis
                 textViewJumlahChapterDiaryDetail.text = "$sizeDiary Chapter"
+            }
+
+            buttonAddChapterDiary.setOnClickListener {
+                val intent = Intent(requireContext(), DiaryChapterEditorActivity::class.java)
+                intent.putExtra("diaryId", diaryId)
+                startActivity(intent)
             }
 
         }
