@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.repository.diary.DiaryRepository
+import id.ac.pnm.novele.viewmodel.diary.DiaryViewModel
 
 class DetailDiaryFragment : Fragment() {
     private var DiaryRepository = DiaryRepository()
@@ -27,6 +31,12 @@ class DetailDiaryFragment : Fragment() {
     private lateinit var textViewJumlahChapterDiaryDetail : TextView
 
     private lateinit var buttonAddChapterDiary: Button
+
+    private lateinit var recyclerViewChapterDiaryDetail : RecyclerView
+
+    private lateinit var diaryChapterAdapter: DiaryChapterAdapter
+
+    private lateinit var diaryViewModel : DiaryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +55,8 @@ class DetailDiaryFragment : Fragment() {
 
         buttonAddChapterDiary = view.findViewById(R.id.buttonAddChapterDiary)
 
+        recyclerViewChapterDiaryDetail = view.findViewById(R.id.recyclerViewChapterDiaryDetail)
+
         return view
     }
 
@@ -60,6 +72,7 @@ class DetailDiaryFragment : Fragment() {
         }
 
         val diaryId = arguments?.getString("idDiary")
+        diaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
 
         if (diaryId != null){
             val rowDiary = DiaryRepository.getDiaryById(diaryId)
@@ -78,6 +91,22 @@ class DetailDiaryFragment : Fragment() {
                 intent.putExtra("diaryId", diaryId)
                 startActivity(intent)
             }
+
+            diaryChapterAdapter = DiaryChapterAdapter()
+            recyclerViewChapterDiaryDetail.apply {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = diaryChapterAdapter
+            }
+
+            diaryViewModel.diaryChapterData.observe(viewLifecycleOwner){ lisChapterDiary ->
+                android.util.Log.d("DetailDiary", "chapter size = ${lisChapterDiary.size}")
+                if (lisChapterDiary.isEmpty()){
+                    diaryChapterAdapter.updateData(emptyList())
+                } else {
+                    diaryChapterAdapter.updateData(lisChapterDiary)
+                }
+            }
+            diaryViewModel.getChapterDiaryData(diaryId)
 
         }
 

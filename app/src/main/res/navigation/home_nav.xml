@@ -23,12 +23,27 @@
         android:id="@+id/profileFragment"
         android:name="id.ac.pnm.novele.view.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_favoritFragment"
+            app:destination="@id/favoritFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/diaryFragment"
         android:name="id.ac.pnm.novele.view.diary.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" />
+    <fragment
+        android:id="@+id/favoritFragment"
+        android:name="id.ac.pnm.novele.view.favorit.FavoritFragment"
+        android:label="fragment_favorit" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="id.ac.pnm.novele.view.history.HistoryFragment"
+        android:label="fragment_history"/>
     <fragment
         android:id="@+id/detailDiaryFragment"
         android:name="id.ac.pnm.novele.view.diary.DetailDiaryFragment"
