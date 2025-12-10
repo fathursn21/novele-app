@@ -31,14 +31,6 @@ class NovelRepository {
             ChapterData(1, "Awal Mula Kisah", 12)
         )
 
-        val chaptersNovelId2 = listOf(
-            ChapterData(5, "Pengejaran di Tengah Hutan", 8),
-            ChapterData(4, "Petunjuk dari Surat Rahasia", 9),
-            ChapterData(3, "Pertemuan di Bawah Pohon Tua", 10),
-            ChapterData(2, "Misteri Hilangnya Kunci", 11),
-            ChapterData(1, "Awal Mula Kisah", 12)
-        )
-
         val listNovel = listOf(
             NovelData("1",
                 R.drawable.f_eragon,

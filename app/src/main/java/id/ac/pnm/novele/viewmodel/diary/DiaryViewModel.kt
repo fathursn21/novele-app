@@ -43,11 +43,9 @@ class DiaryViewModel : ViewModel() {
         _diaryData.postValue(diaryRepository.fetchDiaryData())
     }
 
-    fun getChapterDiaryData(idDiary : String){
-        if (_chapterDiaryData.value.isNullOrEmpty()){
-            val diaryChapterResult = diaryChapterRepository.fetchChapterByDiaryId(idDiary)
-            _chapterDiaryData.postValue((diaryChapterResult))
-        }
+    fun getChapterDiaryData(idDiary: String) {
+        val diaryChapterResult = diaryChapterRepository.fetchChapterByDiaryId(idDiary)
+        _chapterDiaryData.postValue(diaryChapterResult)
     }
 
 }

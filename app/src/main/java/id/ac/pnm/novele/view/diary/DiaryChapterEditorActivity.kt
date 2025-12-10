@@ -46,8 +46,8 @@ class DiaryChapterEditorActivity : AppCompatActivity() {
             val rowDiary = DiaryRepository.getDiaryById(diaryId)
 
             if (rowDiary != null){
-                val chapter = (rowDiary?.chapter?.size ?: 0) + 1
-                textViewHeaderDiaryEditor.text = "Chapter $chapter"
+                val chapterCount = DiaryChapterRepository.countChapterByDiaryId(diaryId) + 1
+                textViewHeaderDiaryEditor.text = "Chapter $chapterCount"
 
                 buttonSaveDiaryChapter.setOnClickListener {
                     val judulChapter = editTextJudulChapter.text.toString().trim()
@@ -65,11 +65,11 @@ class DiaryChapterEditorActivity : AppCompatActivity() {
                     val newChapterDiary = DiaryChapterData(
                         System.currentTimeMillis().toString(),
                         diaryId,
-                        chapter,
+                        chapterCount,
                         judulChapter,
                         chapterContent,
-                        (System.currentTimeMillis() / 1000).toInt()
-                        )
+                        1
+                    )
 
                     DiaryChapterRepository.addChapterDiary(newChapterDiary)
 
