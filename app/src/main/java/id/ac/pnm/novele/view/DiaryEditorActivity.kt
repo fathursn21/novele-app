@@ -47,8 +47,6 @@ class DiaryEditorActivity : AppCompatActivity() {
             insets
         }
 
-        Log.d("DiaryEditorActivity", "onCreate called")
-
         imageViewDiaryCover = findViewById<ImageView>(R.id.imageViewDiaryCover)
         buttonEditDiaryCover = findViewById<ImageButton>(R.id.buttonEditDiaryCover)
 

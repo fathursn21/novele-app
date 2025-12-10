@@ -44,4 +44,9 @@
         android:id="@+id/historyFragment"
         android:name="id.ac.pnm.novele.view.history.HistoryFragment"
         android:label="fragment_history"/>
+    <fragment
+        android:id="@+id/detailDiaryFragment"
+        android:name="id.ac.pnm.novele.view.diary.DetailDiaryFragment"
+        android:label="fragment_detail_diary"
+        tools:layout="@layout/fragment_detail_diary" />
 </navigation>

@@ -12,6 +12,7 @@ data class DiaryData(
 )
 
 data class DiaryChapterData(
+    var idChapter : String,
     var idDiary : String,
     val chapter: Int,
     val title: String,
