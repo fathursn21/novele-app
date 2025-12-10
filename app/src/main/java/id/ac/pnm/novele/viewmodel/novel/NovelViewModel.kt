@@ -24,6 +24,9 @@ class NovelViewModel : ViewModel() {
     private val _totalChapter = MutableLiveData<Int>()
     val totalChapter: LiveData<Int> = _totalChapter
 
+    private val _novelsSortedByChapter = MutableLiveData<List<NovelData>>()
+    val novelsSortedByChapter: LiveData<List<NovelData>> = _novelsSortedByChapter
+
     val novelRepository: NovelRepository = NovelRepository()
     fun getNovelData() {
         if (_novelData.value.isNullOrEmpty()){
@@ -41,6 +44,10 @@ class NovelViewModel : ViewModel() {
     fun clearSearchResult() {
         _searchResult.value = emptyList()
     }
+    //hapus hasil filter biar direset dari awal
+    fun clearSortedResult() {
+        _novelsSortedByChapter.value = emptyList()
+    }
 
     //ngambil novel dari id di novelRepository terus mengisi LiveData detailNovel dengan nilai dari idResult
     fun loadNovelById(id: String?) {
@@ -55,5 +62,16 @@ class NovelViewModel : ViewModel() {
             _chapterData.value = emptyList()
             _totalChapter.value = 0
         }
+    }
+
+    //ascendant itu terbanyak ke tersedikit
+    fun loadChaptersTerbanyak() {
+        val sortedList = novelRepository.getNovelByChapterCount(ascending = false)
+        _novelsSortedByChapter.postValue(sortedList)
+    }
+    //descendant itu tersedikit ke terbanyak
+    fun loadChaptersTersedikit() {
+        val sortedList = novelRepository.getNovelByChapterCount(ascending = true)
+        _novelsSortedByChapter.postValue(sortedList)
     }
 }

@@ -11,11 +11,14 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.view.DetailActivity
 import id.ac.pnm.novele.viewmodel.SearchViewModel
@@ -32,8 +35,6 @@ class LibraryFragment : Fragment() {
     private lateinit var imageViewLibrarySearchIcon : ImageView
     private lateinit var imageViewLibraryCancelSearchIcon : ImageView
     private lateinit var imageViewLibraryFilterSearchIcon : ImageView
-
-
 
     private val onBackPressedCallback = object : OnBackPressedCallback(false) {
         override fun handleOnBackPressed() {
@@ -110,11 +111,44 @@ class LibraryFragment : Fragment() {
                 false
             }
         }
+
+        imageViewLibraryFilterSearchIcon.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(requireActivity())
+            val viewBottomSheetDialog = layoutInflater.inflate(R.layout.bottom_sheet_library,null)
+
+            val radioGroup : RadioGroup = viewBottomSheetDialog.findViewById(R.id.radioGroupBottomSheet)
+
+            bottomSheetDialog.setCancelable(true)
+            bottomSheetDialog.setCanceledOnTouchOutside(true)
+            bottomSheetDialog.setContentView(viewBottomSheetDialog)
+            bottomSheetDialog.show()
+            radioGroup.setOnCheckedChangeListener { group, checkedId ->
+               when(checkedId){
+                   R.id.radioButtonTerbanyak -> {
+                       novelViewModel.loadChaptersTerbanyak()
+                       Toast.makeText(requireActivity(), "Diurutkan: Chapter Terbanyak", Toast.LENGTH_SHORT).show()
+                   }
+                   R.id.radioButtonTersedikit -> {
+                       novelViewModel.loadChaptersTersedikit()
+                       Toast.makeText(requireActivity(), "Diurutkan: Chapter Tersedikit", Toast.LENGTH_SHORT).show()
+                   }
+               }
+            }
+        }
+
+
         //adapter
         recyclerViewLibrary.apply {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = libraryAdapter
         }
+
+        novelViewModel.novelsSortedByChapter.observe(viewLifecycleOwner) { sortedList ->
+            if (sortedList.isNotEmpty()) {
+                libraryAdapter.adapterListenerData(sortedList)
+            }
+        }
+
         //untuk mengamati value query lalu mengirim query ke fungsi novelViewmodel
         searchViewModel.query.observe(viewLifecycleOwner) { query ->
             novelViewModel.searchNovel(query)
@@ -151,8 +185,9 @@ class LibraryFragment : Fragment() {
         imageViewLibraryFilterSearchIcon.visibility = View.VISIBLE
         //textView
         textViewLibrary.visibility = View.VISIBLE
-        //membersihkan hasil search
+        //membersihkan hasil search dan filter biar rapi
         novelViewModel.clearSearchResult()
+        novelViewModel.clearSortedResult()
         //sama kayak diatas untuk menyembunyikan keyboard kalau masih muncul
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(editTextLibrarySearchInput.windowToken, 0)
