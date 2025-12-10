@@ -12,8 +12,10 @@
     <string name="cd_ic_filter_search">Filter Search Icon</string>
     <string name="cd_ic_more_vertical_icon">More Vertical</string>
     <string name="title_library_fragment">Library</string>
+    <string name="title_favorit_fragment">Favorit</string>
     <string name="title_profile_fragment">Profile</string>
     <string name="title_home_fragment">Home</string>
+    <string name="title_history_fragment">History</string>
     <string name="title_detail_activity">Detail</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
