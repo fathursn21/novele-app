@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.view.DetailActivity
-import id.ac.pnm.novele.view.home.NovelVerticalUpdateAdapter
 import id.ac.pnm.novele.viewmodel.SearchViewModel
 import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 
@@ -32,7 +31,6 @@ class LibraryFragment : Fragment() {
     private lateinit var textViewLibrary: TextView
     private lateinit var imageViewLibrarySearchIcon : ImageView
     private lateinit var imageViewLibraryCancelSearchIcon : ImageView
-    private lateinit var imageViewLibraryMoreVerticalIcon : ImageView
     private lateinit var imageViewLibraryFilterSearchIcon : ImageView
 
 
@@ -54,7 +52,6 @@ class LibraryFragment : Fragment() {
         editTextLibrarySearchInput = view.findViewById(R.id.editTextLibrarySearchInput)
         imageViewLibrarySearchIcon = view.findViewById(R.id.imageViewLibrarySearchIcon)
         imageViewLibraryCancelSearchIcon = view.findViewById(R.id.imageViewLibraryCancelSearchIcon)
-        imageViewLibraryMoreVerticalIcon = view.findViewById(R.id.imageViewLibraryMoreVerticalIcon)
         imageViewLibraryFilterSearchIcon = view.findViewById(R.id.imageViewLibraryFilterSearchIcon)
 
 
@@ -80,7 +77,6 @@ class LibraryFragment : Fragment() {
             imageViewLibrarySearchIcon.visibility = View.GONE
             imageViewLibraryCancelSearchIcon.visibility = View.VISIBLE
             imageViewLibraryFilterSearchIcon.visibility = View.GONE
-            imageViewLibraryMoreVerticalIcon.visibility = View.GONE
             //textView
             textViewLibrary.visibility = View.GONE
             // editText
@@ -153,7 +149,6 @@ class LibraryFragment : Fragment() {
         imageViewLibrarySearchIcon.visibility = View.VISIBLE
         imageViewLibraryCancelSearchIcon.visibility = View.GONE
         imageViewLibraryFilterSearchIcon.visibility = View.VISIBLE
-        imageViewLibraryMoreVerticalIcon.visibility = View.VISIBLE
         //textView
         textViewLibrary.visibility = View.VISIBLE
         //membersihkan hasil search
