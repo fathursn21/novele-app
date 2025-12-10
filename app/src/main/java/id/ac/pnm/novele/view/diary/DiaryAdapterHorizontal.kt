@@ -9,14 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
 
-class DiaryAdapterHorizontal : RecyclerView.Adapter<DiaryAdapterHorizontal.DiaryHorizontalViewHolder>() {
+class DiaryAdapterHorizontal(
+    private val onItemClick: (DiaryData) -> Unit
+) : RecyclerView.Adapter<DiaryAdapterHorizontal.DiaryHorizontalViewHolder>() {
     private var listDiary: List<DiaryData> = emptyList()
 
     class  DiaryHorizontalViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val imageViewCoverNovelHorizontal = view.findViewById<ImageView>(R.id.imageViewCoverNovelHorizontal)
 
-        fun bind(novel : DiaryData){
-            imageViewCoverNovelHorizontal.setImageResource(novel.coverDiary)
+        fun bind(diary : DiaryData, onItemClick: (DiaryData) -> Unit){
+            imageViewCoverNovelHorizontal.setImageResource(diary.coverDiary)
+
+            itemView.setOnClickListener {
+                onItemClick(diary)
+            }
         }
     }
 
@@ -33,7 +39,7 @@ class DiaryAdapterHorizontal : RecyclerView.Adapter<DiaryAdapterHorizontal.Diary
         position: Int
     ) {
         val row = listDiary[position]
-        holder.bind(row)
+        holder.bind(row, onItemClick)
     }
 
     override fun getItemCount(): Int {

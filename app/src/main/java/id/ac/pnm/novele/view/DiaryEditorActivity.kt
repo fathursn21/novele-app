@@ -1,19 +1,17 @@
 package id.ac.pnm.novele.view
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
 import id.ac.pnm.novele.data.repository.diary.DiaryRepository
@@ -22,6 +20,8 @@ class DiaryEditorActivity : AppCompatActivity() {
 
     private lateinit var imageViewDiaryCover: ImageView
     private lateinit var buttonEditDiaryCover : ImageButton
+
+    val diaryRepository: DiaryRepository = DiaryRepository()
 
     private var selectedCoverRequest:Int = R.drawable.ic_launcher_background
 
@@ -61,11 +61,23 @@ class DiaryEditorActivity : AppCompatActivity() {
 
         val buttonCreateDiary = findViewById<Button>(R.id.buttonCreateDiary)
         val editTextDiaryTitle = findViewById<EditText>(R.id.editTextDiaryTitle)
+        val editTextDiaryPenulis = findViewById<EditText>(R.id.editTextPenulis)
+        val edittextDIarySinposis = findViewById<EditText>(R.id.editTextSinopsis)
         buttonCreateDiary.setOnClickListener {
             val diaryTitle = editTextDiaryTitle.text.toString().trim()
+            val diaryPenulis = editTextDiaryPenulis.text.toString().trim()
+            val diarySinposis = edittextDIarySinposis.text.toString().trim()
 
             if (diaryTitle.isEmpty()){
                 editTextDiaryTitle.error = "Judul diary tidak boleh kosong"
+                return@setOnClickListener
+            }
+            if (diaryPenulis.isEmpty()){
+                editTextDiaryPenulis.error = "Nama penulis tidak boleh kosong"
+                return@setOnClickListener
+            }
+            if (diarySinposis.isEmpty()){
+                edittextDIarySinposis.error = "Sinopsis diary tidak boleh kosong"
                 return@setOnClickListener
             }
 
@@ -73,13 +85,12 @@ class DiaryEditorActivity : AppCompatActivity() {
                 System.currentTimeMillis().toString(),
                 selectedCoverRequest,
                 diaryTitle,
-                0,
-                0,
-                0,
-                0
+                diaryPenulis,
+                emptyList(),
+                diarySinposis
             )
 
-            DiaryRepository.addDiary(newDiary)
+            diaryRepository.addDiary(newDiary)
 
             finish()
         }

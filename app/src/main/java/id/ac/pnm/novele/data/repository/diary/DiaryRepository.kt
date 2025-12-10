@@ -3,15 +3,31 @@ package id.ac.pnm.novele.data.repository.diary
 import android.util.Log
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
+import id.ac.pnm.novele.data.model.novel.Genre
 
-object DiaryRepository {
+class DiaryRepository {
 
     private val diaryList = mutableListOf(
-        DiaryData("1", R.drawable.ic_launcher_background, "Makan Sate", 2, 1, 1, 5),
-        DiaryData("2", R.drawable.ic_launcher_background, "Makan Bakso", 2, 1, 1, 5),
-        DiaryData("3", R.drawable.ic_launcher_background, "Makan Mie Ayam", 2, 1, 1, 5),
-        DiaryData("4", R.drawable.ic_launcher_background, "Makan Soto", 2, 1, 1, 5),
-        DiaryData("5", R.drawable.ic_launcher_background, "Makan Ayam Goreng", 2, 1, 1, 5),
+        DiaryData("1", R.drawable.ic_launcher_background,
+            "Makan Sate",
+            "anonim", emptyList(),
+            "sinopsis testing"),
+        DiaryData("1", R.drawable.ic_launcher_background,
+            "Makan Bakso",
+            "anonim", emptyList(),
+            "sinopsis testing"),
+        DiaryData("1", R.drawable.ic_launcher_background,
+            "Makan Mie Ayam",
+            "anonim", emptyList(),
+            "sinopsis testing"),
+        DiaryData("1", R.drawable.ic_launcher_background,
+            "Makan Soto",
+            "anonim", emptyList(),
+            "sinopsis testing"),
+        DiaryData("1", R.drawable.ic_launcher_background,
+            "Makan Ayam Goreng",
+            "anonim", emptyList(),
+            "sinopsis testing"),
     )
 
     fun fetchDiaryData(): List<DiaryData> {
