@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageViewLibrarySearchIcon"
+                android:id="@+id/imageViewHistorySearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -31,11 +31,11 @@
                 android:src="@drawable/ic_baseline_search_24"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageViewLibraryFilterSearchIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewHistoryFilterSearchIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewLibraryCancelSearchIcon"
+                android:id="@+id/imageViewHistoryCancelSearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewLibraryFilterSearchIcon"
+                android:id="@+id/imageViewHistoryFilterSearchIcon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:clickable="true"
@@ -62,10 +62,10 @@
 
 
             <TextView
-                android:id="@+id/textViewLibrary"
+                android:id="@+id/textViewHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_library_fragment"
+                android:text="@string/title_history_fragment"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextLibrarySearchInput"
+                android:id="@+id/editTextHistorySearchInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -83,14 +83,14 @@
                 android:inputType="text"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageViewLibraryCancelSearchIcon"
+                app:layout_constraintEnd_toStartOf="@id/imageViewHistoryCancelSearchIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewNovelLibrary"
+            android:id="@+id/recyclerViewNovelHistory"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
