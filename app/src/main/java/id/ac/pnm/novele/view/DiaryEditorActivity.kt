@@ -2,6 +2,7 @@ package id.ac.pnm.novele.view
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.findNavController
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
 import id.ac.pnm.novele.data.repository.diary.DiaryRepository
@@ -44,6 +46,8 @@ class DiaryEditorActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        Log.d("DiaryEditorActivity", "onCreate called")
 
         imageViewDiaryCover = findViewById<ImageView>(R.id.imageViewDiaryCover)
         buttonEditDiaryCover = findViewById<ImageButton>(R.id.buttonEditDiaryCover)

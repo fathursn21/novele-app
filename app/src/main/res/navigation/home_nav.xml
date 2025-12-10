@@ -29,4 +29,9 @@
         android:name="id.ac.pnm.novele.view.diary.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" />
+    <fragment
+        android:id="@+id/detailDiaryFragment"
+        android:name="id.ac.pnm.novele.view.diary.DetailDiaryFragment"
+        android:label="fragment_detail_diary"
+        tools:layout="@layout/fragment_detail_diary" />
 </navigation>
