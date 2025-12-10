@@ -1,5 +1,6 @@
 package id.ac.pnm.novele.view.diary
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ class DetailDiaryFragment : Fragment() {
     private var DiaryRepository = DiaryRepository()
 
     private lateinit var imageViewBackArrowIcon : ImageView
+    private lateinit var imageViewDetailHomeIcon : ImageView
 
     private lateinit var imageViewCoverDiaryDetail : ImageView
     private lateinit var textViewJudulDiaryDetail : TextView
@@ -30,6 +32,7 @@ class DetailDiaryFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_detail_diary, container, false)
 
         imageViewBackArrowIcon = view.findViewById(R.id.imageViewBackArrowIcon)
+        imageViewDetailHomeIcon = view.findViewById(R.id.imageViewDetailHomeIcon)
 
         imageViewCoverDiaryDetail = view.findViewById(R.id.imageViewCoverDiaryDetail)
         textViewJudulDiaryDetail = view.findViewById(R.id.textViewJudulDiaryDetail)
@@ -47,18 +50,23 @@ class DetailDiaryFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        imageViewDetailHomeIcon.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
+
         val diaryId = arguments?.getString("idDiary")
-        Log.d("DetailDiary", "diaryId = $diaryId")
 
         if (diaryId != null){
             val rowDiary = DiaryRepository.getDiaryById(diaryId)
             Log.d("DetailDiary", "rowDiary = $rowDiary")
 
             if (rowDiary != null){
+                val sizeDiary = rowDiary?.chapter?.size ?: 0
                 imageViewCoverDiaryDetail.setImageResource(rowDiary.coverDiary)
                 textViewJudulDiaryDetail.text = rowDiary.judulDiary
                 textViewPenulisDiaryDetail.text = rowDiary.penulis
                 textViewSinopsisNovelDetail.text = rowDiary.sinopsis
+                textViewJumlahChapterDiaryDetail.text = "$sizeDiary Chapter"
             }
 
         }
