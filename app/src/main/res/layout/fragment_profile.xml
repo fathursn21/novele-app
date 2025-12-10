@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
         <LinearLayout
-            android:id="@+id/layoutRiwayatHeader"
+            android:id="@+id/layoutHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -132,7 +132,7 @@
             android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutRiwayatHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutHistory" />
 
         <LinearLayout
             android:id="@+id/layoutNovelAnda"
