@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.user.UserDataSource
 import id.ac.pnm.novele.view.HomeActivity
@@ -36,6 +37,8 @@ class ProfileFragment : Fragment() {
     private var displayName: String? = null
     private lateinit var textViewDisplayName: TextView
     private lateinit var layoutLogout: LinearLayout
+    private lateinit var layoutFavorit: LinearLayout
+    private lateinit var layoutHistory: LinearLayout
     private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +62,8 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         layoutLogout = view.findViewById(R.id.layoutLogout)
+        layoutFavorit = view.findViewById(R.id.layoutFavorit)
+        layoutHistory = view.findViewById(R.id.layoutHistory)
         textViewDisplayName = view.findViewById(R.id.textViewDisplayName)
         return view
     }
@@ -92,8 +97,15 @@ class ProfileFragment : Fragment() {
         layoutLogout.setOnClickListener {
             logout()
         }
+        layoutHistory.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.action_profileFragment_to_historyFragment)
+        }
+        layoutFavorit.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.action_profileFragment_to_favoritFragment)
+        }
     }
-
     private fun logout() {
         //menghapus sesi login, fungsinya ada di file AuthViewModel
         authViewModel.logout()
