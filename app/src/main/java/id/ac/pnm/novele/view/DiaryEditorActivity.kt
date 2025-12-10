@@ -1,5 +1,6 @@
 package id.ac.pnm.novele.view
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 import id.ac.pnm.novele.R
 
 class DiaryEditorActivity : AppCompatActivity() {
@@ -44,6 +46,11 @@ class DiaryEditorActivity : AppCompatActivity() {
         buttonEditDiaryCover.setOnClickListener {
             // call launcher function cover where in filters all image
             pickImageLauncher.launch("image/*")
+        }
+
+        val buttonCancel = findViewById<Button>(R.id.buttonCancel)
+        buttonCancel.setOnClickListener {
+            finish()
         }
 
         val buttonCreateDiary = findViewById<Button>(R.id.buttonCreateDiary)
