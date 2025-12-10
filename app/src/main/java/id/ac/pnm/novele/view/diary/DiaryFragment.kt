@@ -20,6 +20,8 @@ class DiaryFragment : Fragment() {
 
     private lateinit var buttonAddDiary : Button
 
+    private lateinit var diaryViewModel: DiaryViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +40,7 @@ class DiaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // set horizontal slider in diary view in case karyaku
-        val diaryViewModel: DiaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
+        diaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
         val diaryAdapterHorizontal = DiaryAdapterHorizontal()
 
         recyclerViewDiaryHorizontal.apply {
@@ -63,5 +65,10 @@ class DiaryFragment : Fragment() {
             activity?.startActivity(intent)
         }
         
+    }
+
+    override fun onResume() {
+        super.onResume()
+        diaryViewModel.getDiaryData()
     }
 }

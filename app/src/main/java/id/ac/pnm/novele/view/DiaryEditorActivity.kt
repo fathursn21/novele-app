@@ -15,17 +15,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import id.ac.pnm.novele.R
+import id.ac.pnm.novele.data.model.diary.DiaryData
+import id.ac.pnm.novele.data.repository.diary.DiaryRepository
 
 class DiaryEditorActivity : AppCompatActivity() {
 
     private lateinit var imageViewDiaryCover: ImageView
     private lateinit var buttonEditDiaryCover : ImageButton
 
+    private var selectedCoverRequest:Int = R.drawable.ic_launcher_background
+
     // define launcher to listen action pick image in gallery
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         uri : Uri? ->
         if (uri != null){
             imageViewDiaryCover.setImageURI(uri)
+
+            selectedCoverRequest = R.drawable.ic_launcher_background
         }
     }
 
@@ -48,17 +54,34 @@ class DiaryEditorActivity : AppCompatActivity() {
             pickImageLauncher.launch("image/*")
         }
 
-        val buttonCancel = findViewById<Button>(R.id.buttonCancel)
-        buttonCancel.setOnClickListener {
+        val buttonCancelEditDiary = findViewById<Button>(R.id.buttonCancelEditDiary)
+        buttonCancelEditDiary.setOnClickListener {
             finish()
         }
 
         val buttonCreateDiary = findViewById<Button>(R.id.buttonCreateDiary)
         val editTextDiaryTitle = findViewById<EditText>(R.id.editTextDiaryTitle)
         buttonCreateDiary.setOnClickListener {
-            val diartTitle = editTextDiaryTitle.text.toString().trim()
+            val diaryTitle = editTextDiaryTitle.text.toString().trim()
 
-//            if ()
+            if (diaryTitle.isEmpty()){
+                editTextDiaryTitle.error = "Judul diary tidak boleh kosong"
+                return@setOnClickListener
+            }
+
+            val newDiary = DiaryData (
+                System.currentTimeMillis().toString(),
+                selectedCoverRequest,
+                diaryTitle,
+                0,
+                0,
+                0,
+                0
+            )
+
+            DiaryRepository.addDiary(newDiary)
+
+            finish()
         }
 
 

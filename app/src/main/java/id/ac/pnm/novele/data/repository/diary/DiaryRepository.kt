@@ -1,9 +1,10 @@
 package id.ac.pnm.novele.data.repository.diary
 
+import android.util.Log
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
 
-class DiaryRepository {
+object DiaryRepository {
 
     private val diaryList = mutableListOf(
         DiaryData("1", R.drawable.ic_launcher_background, "Makan Sate", 2, 1, 1, 5),
