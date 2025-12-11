@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
+import id.ac.pnm.novele.data.repository.diary.DiaryChapterRepository
 import id.ac.pnm.novele.data.repository.diary.DiaryRepository
 import id.ac.pnm.novele.viewmodel.diary.DiaryViewModel
 
@@ -37,6 +38,8 @@ class DetailDiaryFragment : Fragment() {
     private lateinit var diaryChapterAdapter: DiaryChapterAdapter
 
     private lateinit var diaryViewModel : DiaryViewModel
+
+    private var diaryId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +66,8 @@ class DetailDiaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        diaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
+
         imageViewBackArrowIcon.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -71,44 +76,48 @@ class DetailDiaryFragment : Fragment() {
             findNavController().navigate(R.id.homeFragment)
         }
 
-        val diaryId = arguments?.getString("idDiary")
-        diaryViewModel = ViewModelProvider(this)[DiaryViewModel::class.java]
+        diaryId = arguments?.getString("idDiary")
+        diaryChapterAdapter = DiaryChapterAdapter()
+        recyclerViewChapterDiaryDetail.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = diaryChapterAdapter
+        }
 
-        if (diaryId != null){
-            val rowDiary = DiaryRepository.getDiaryById(diaryId)
+        diaryViewModel.diaryChapterData.observe(viewLifecycleOwner) { lisChapterDiary ->
+            Log.d("DetailDiary", "chapter size = ${lisChapterDiary.size}")
+            diaryChapterAdapter.updateData(lisChapterDiary)
 
-            if (rowDiary != null){
-                val sizeDiary = rowDiary?.chapter?.size ?: 0
+            // update jumlah chapter setiap kali data berubah
+            diaryId?.let { id ->
+                textViewJumlahChapterDiaryDetail.text = "${lisChapterDiary.size} Chapter"
+            }
+        }
+
+        diaryId?.let { id ->
+            val rowDiary = DiaryRepository.getDiaryById(id)
+            if (rowDiary != null) {
                 imageViewCoverDiaryDetail.setImageResource(rowDiary.coverDiary)
                 textViewJudulDiaryDetail.text = rowDiary.judulDiary
                 textViewPenulisDiaryDetail.text = rowDiary.penulis
                 textViewSinopsisNovelDetail.text = rowDiary.sinopsis
-                textViewJumlahChapterDiaryDetail.text = "$sizeDiary Chapter"
             }
 
             buttonAddChapterDiary.setOnClickListener {
                 val intent = Intent(requireContext(), DiaryChapterEditorActivity::class.java)
-                intent.putExtra("diaryId", diaryId)
+                intent.putExtra("diaryId", id)
                 startActivity(intent)
             }
 
-            diaryChapterAdapter = DiaryChapterAdapter()
-            recyclerViewChapterDiaryDetail.apply {
-                layoutManager = LinearLayoutManager(activity)
-                adapter = diaryChapterAdapter
-            }
-
-            diaryViewModel.diaryChapterData.observe(viewLifecycleOwner){ lisChapterDiary ->
-                android.util.Log.d("DetailDiary", "chapter size = ${lisChapterDiary.size}")
-                if (lisChapterDiary.isEmpty()){
-                    diaryChapterAdapter.updateData(emptyList())
-                } else {
-                    diaryChapterAdapter.updateData(lisChapterDiary)
-                }
-            }
-            diaryViewModel.getChapterDiaryData(diaryId)
-
+            // first load
+            diaryViewModel.getChapterDiaryData(id)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        diaryId?.let { id ->
+            diaryViewModel.getChapterDiaryData(id)
+        }
     }
 }

@@ -52,23 +52,23 @@
             android:paddingStart="4dp"
             android:paddingEnd="4dp">
 
-            <ImageButton
-                android:id="@+id/buttonEditChapterDiary"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="6dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_note_alt_24"
-                android:contentDescription="Edit Chapter" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/buttonEditChapterDiary"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:padding="6dp"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:src="@drawable/ic_baseline_note_alt_24"-->
+<!--                android:contentDescription="Edit Chapter" />-->
 
-            <ImageButton
-                android:id="@+id/buttonDeleteChapterDiary"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="6dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_cancel_24"
-                android:contentDescription="Hapus Chapter" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/buttonDeleteChapterDiary"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:padding="6dp"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:src="@drawable/ic_baseline_cancel_24"-->
+<!--                android:contentDescription="Hapus Chapter" />-->
         </LinearLayout>
 
 </LinearLayout>
