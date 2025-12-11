@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Novele">
         <activity
+            android:name=".view.BacaNovelActivity"
+            android:exported="false" />
+            
+        <activity
             android:name=".view.diary.DiaryChapterEditorActivity"
             android:exported="false" />
         <activity
