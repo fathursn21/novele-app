@@ -125,7 +125,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewNovelHorizontal"
+            android:id="@+id/recyclerViewHistoryHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -142,7 +142,7 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewNovelHorizontal">
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewHistoryHorizontal">
 
             <ImageView
                 android:layout_width="24dp"
