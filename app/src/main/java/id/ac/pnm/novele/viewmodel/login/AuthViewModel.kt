@@ -52,8 +52,8 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         }
     }
 
-    fun register(username: String, email: String, tanggalLahir: String, password: String, konfirmasiPassword: String) {
-        val result = authRepository.register(username, email, tanggalLahir, password, konfirmasiPassword)
+    fun register(username: String, email: String, password: String, konfirmasiPassword: String) {
+        val result = authRepository.register(username, email, password, konfirmasiPassword)
 
         if (result is Result.Success) {
             // Jika register sukses, kita bisa menganggapnya sebagai login sukses juga
@@ -64,12 +64,10 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         }
     }
 
-    fun registerDataChanged(username: String, email: String,tanggalLahir: String, password: String, konfirmasiPassword: String) {
+    fun registerDataChanged(username: String, email: String, password: String, konfirmasiPassword: String) {
         if (!isUsernameValid(username)) { // Re-use username validation
             _registerForm.value = RegisterFormState(usernameError = R.string.invalid_username)
         } else if (!isEmailValid(email)) { // Validasi email baru
-            _registerForm.value = RegisterFormState(emailError = R.string.invalid_email)
-        } else if (!isTanggalLahirValid(tanggalLahir)) { // Validasi email baru
             _registerForm.value = RegisterFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) { // Validasi email baru
             _registerForm.value = RegisterFormState(emailError = R.string.invalid_email)
@@ -91,9 +89,6 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         return true
     }
 
-    private fun isTanggalLahirValid(tanggalLahir: String): Boolean {
-        return true
-    }
 
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {

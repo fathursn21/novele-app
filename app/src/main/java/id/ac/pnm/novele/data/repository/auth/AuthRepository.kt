@@ -41,8 +41,8 @@ class AuthRepository(val dataSource: AuthDataSource) {
     }
 
     //handle register
-    fun register(username: String, email: String, tanggalLahir: String, password: String, konfirmasiPassword: String): Result<LoggedInUser> {
-        val result = dataSource.register(username, email, tanggalLahir,password, konfirmasiPassword)
+    fun register(username: String, email: String, password: String, konfirmasiPassword: String): Result<LoggedInUser> {
+        val result = dataSource.register(username, email, password, konfirmasiPassword)
 
         // Setelah register sukses, secara otomatis pengguna dianggap sudah login
         if (result is Result.Success) {

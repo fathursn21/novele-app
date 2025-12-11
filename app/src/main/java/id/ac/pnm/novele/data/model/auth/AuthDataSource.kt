@@ -31,7 +31,7 @@ class AuthDataSource(private val userDataSource: UserDataSource) {
         }
     }
     //handle register yang nentuin sukses atau engganya
-    fun register(username: String, email: String, tanggalLahir: String, password: String, konfirmasiPassword: String): Result<LoggedInUser> {
+    fun register(username: String, email: String, tanggalLahir: String, password: String): Result<LoggedInUser> {
         try {
             if (userDataSource.isUsernameRegistered(username) || (userDataSource.isEmailRegistered(email))){
                 return Result.Error(IOException("Username atau email sudah terdaftar"))

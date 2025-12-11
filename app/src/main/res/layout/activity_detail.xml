@@ -16,13 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/bg_shape_navigation_top">
+        android:background="@drawable/bg_rounded_button_solid">
 
         <ImageView
             android:id="@+id/imageViewBackArrowIcon"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
+            android:tint="@android:color/white"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/title_detail_activity"
+            android:textColor="@android:color/white"
             android:textAlignment="center"
             android:textSize="32sp" />
 
@@ -38,6 +40,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
+            android:tint="@android:color/white"
             android:src="@drawable/ic_outline_home_24" />
     </LinearLayout>
 
