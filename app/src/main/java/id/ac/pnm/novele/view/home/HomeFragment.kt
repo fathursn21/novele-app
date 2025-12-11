@@ -85,12 +85,12 @@ class HomeFragment : Fragment() {
 
         //adapter ngirim paket id novel
         novelVerticalUpdateAdapter = NovelVerticalUpdateAdapter { id ->
-            val intent = Intent(requireContext(), DetailActivity::class.java)
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
             intent.putExtra("ID_NOVEL", id)
             startActivity(intent)
         }
         novelHorizontalAdapter = NovelHorizontalAdapter{ id ->
-            val intent = Intent(requireContext(), DetailActivity::class.java)
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
             intent.putExtra("ID_NOVEL", id)
             startActivity(intent)
         }
@@ -148,7 +148,7 @@ class HomeFragment : Fragment() {
                 val daftarNovelHorizontal = daftarNovel.take(5)
                 novelHorizontalAdapter.updateData(daftarNovelHorizontal)
 
-                val daftarNovelVertical = daftarNovel.take(5)
+                val daftarNovelVertical = daftarNovel
                 novelVerticalUpdateAdapter.updateData(daftarNovelVertical)
             } else {
                 novelHorizontalAdapter.updateData(emptyList())

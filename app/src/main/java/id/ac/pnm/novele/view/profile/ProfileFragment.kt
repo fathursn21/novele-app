@@ -6,33 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
-import id.ac.pnm.novele.data.model.user.UserDataSource
+import id.ac.pnm.novele.view.DetailActivity
 import id.ac.pnm.novele.view.HomeActivity
 import id.ac.pnm.novele.view.LoginActivity
 import id.ac.pnm.novele.viewmodel.login.AuthViewModel
 import id.ac.pnm.novele.viewmodel.login.AuthViewModelFactory
+import id.ac.pnm.novele.viewmodel.novel.NovelViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
-
-///**
-// * A simple [Fragment] subclass.
-// * Use the [ProfileFragment.newInstance] factory method to
-// * create an instance of this fragment.
-// */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-//    private var param1: String? = null
-//    private var param2: String? = null
 
     private var displayName: String? = null
     private lateinit var textViewDisplayName: TextView
@@ -40,14 +28,16 @@ class ProfileFragment : Fragment() {
     private lateinit var layoutFavorit: LinearLayout
     private lateinit var layoutHistory: LinearLayout
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var novelViewModel: NovelViewModel
+
+    private lateinit var historyHorizontalAdapter: HistoryHorizontalAdapter
+    private lateinit var recyclerViewHistoryHorizontal : RecyclerView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-        //getExtra dari LoginActivity
+
         val getExtraDisplayName = requireActivity().intent.getStringExtra(HomeActivity.DISPLAY_NAME)
         displayName = getExtraDisplayName
         authViewModel = ViewModelProvider(requireActivity(), AuthViewModelFactory())[AuthViewModel::class.java]
@@ -65,46 +55,41 @@ class ProfileFragment : Fragment() {
         layoutFavorit = view.findViewById(R.id.layoutFavorit)
         layoutHistory = view.findViewById(R.id.layoutHistory)
         textViewDisplayName = view.findViewById(R.id.textViewDisplayName)
+        recyclerViewHistoryHorizontal = view.findViewById(R.id.recyclerViewHistoryHorizontal)
         return view
     }
 
-
-    //    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment ProfileFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            ProfileFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         textViewDisplayName.text = displayName
-
+        novelViewModel = ViewModelProvider(requireActivity())[NovelViewModel::class.java]
         //pindah ke halaman login
         layoutLogout.setOnClickListener {
             logout()
         }
-        layoutHistory.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(R.id.action_profileFragment_to_historyFragment)
+
+        historyHorizontalAdapter = HistoryHorizontalAdapter{ id ->
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            intent.putExtra("ID_NOVEL", id)
+            startActivity(intent)
         }
-        layoutFavorit.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(R.id.action_profileFragment_to_favoritFragment)
+
+        recyclerViewHistoryHorizontal.apply {
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL,false)
+            adapter = historyHorizontalAdapter
         }
+
+        novelViewModel.novelData.observe(viewLifecycleOwner){ daftarNovel ->
+            if (daftarNovel.isNotEmpty()){
+                val daftarNovelHorizontal = daftarNovel.take(5)
+                historyHorizontalAdapter.updateData(daftarNovelHorizontal)
+            } else {
+                historyHorizontalAdapter.updateData(emptyList())
+            }
+        }
+        //ambil daftar novelnya biar ga kosong
+        novelViewModel.getNovelData()
     }
     private fun logout() {
         //menghapus sesi login, fungsinya ada di file AuthViewModel
