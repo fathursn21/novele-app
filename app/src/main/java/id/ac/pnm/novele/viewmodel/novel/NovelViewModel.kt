@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import id.ac.pnm.novele.data.model.novel.ChapterData
+import id.ac.pnm.novele.data.model.novel.Genre
 import id.ac.pnm.novele.data.model.novel.NovelData
 import id.ac.pnm.novele.data.repository.novel.NovelRepository
 

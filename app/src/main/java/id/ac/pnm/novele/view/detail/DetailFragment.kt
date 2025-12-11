@@ -22,6 +22,7 @@ class DetailFragment : Fragment() {
     private lateinit var textViewPenulisNovelDetail: TextView
     private lateinit var textViewPenerbitNovelDetail: TextView
     private lateinit var textViewJumlahChapterNovelDetail: TextView
+    private lateinit var textViewTagGenreDetailNovel: TextView
     private lateinit var detailChapterAdapter: DetailChapterAdapter
     private lateinit var imageViewCoverNovelDetail : ImageView
     private lateinit var novelViewModel: NovelViewModel
@@ -44,6 +45,7 @@ class DetailFragment : Fragment() {
         textViewPenulisNovelDetail = view.findViewById(R.id.textViewPenulisNovelDetail)
         textViewPenerbitNovelDetail = view.findViewById(R.id.textViewPenerbitNovelDetail)
         textViewJumlahChapterNovelDetail = view.findViewById(R.id.textViewJumlahChapterNovelDetail)
+        textViewTagGenreDetailNovel = view.findViewById(R.id.textViewTagGenreDetailNovel)
         imageViewCoverNovelDetail = view.findViewById(R.id.imageViewCoverNovelDetail)
 
         recyclerViewChapterNovelDetail = view.findViewById(R.id.recyclerViewChapterNovelDetail)
@@ -72,6 +74,7 @@ class DetailFragment : Fragment() {
             textViewSinopsisNovelDetail.text = novel?.sinopsis
             textViewPenulisNovelDetail.text = novel?.penulis
             textViewPenerbitNovelDetail.text = novel?.penerbit
+            textViewTagGenreDetailNovel.text = novel?.tagGenre.toString()
             imageViewCoverNovelDetail.setImageResource(novel?.coverNovel!!)
         }
         //daftar chapter
