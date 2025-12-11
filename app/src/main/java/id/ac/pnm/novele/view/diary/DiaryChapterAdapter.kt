@@ -1,5 +1,6 @@
 package id.ac.pnm.novele.view.diary
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryChapterData
 import id.ac.pnm.novele.data.model.novel.ChapterData
+import id.ac.pnm.novele.view.BacaNovelActivity
 
 class DiaryChapterAdapter : RecyclerView.Adapter<DiaryChapterAdapter.DiaryChapterViewHolder>() {
     private var daftarChapterDiary : List<DiaryChapterData> = emptyList()
@@ -44,6 +46,12 @@ class DiaryChapterAdapter : RecyclerView.Adapter<DiaryChapterAdapter.DiaryChapte
     ) {
         val chapter = daftarChapterDiary[position]
         holder.bind(chapter)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, BacaNovelActivity::class.java)
+            holder.itemView.context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int {
