@@ -14,6 +14,10 @@
         <activity
             android:name=".view.BacaNovelActivity"
             android:exported="false" />
+            
+        <activity
+            android:name=".view.diary.DiaryChapterEditorActivity"
+            android:exported="false" />
         <activity
             android:name=".view.DiaryEditorActivity"
             android:exported="false" />
