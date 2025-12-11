@@ -31,7 +31,6 @@ class RegisterActivity : AppCompatActivity() {
         val username = binding.editTextUsername
         val password = binding.editTextPassword
         val konfirmasiPassword = binding.editTextKonfirmasiPassword
-        val tanggalLahir =  binding.editTextTanggalLahir
         val daftar = binding.buttonDaftar
         val kembali = binding.buttonKembali
         val loading = binding.loading
@@ -75,15 +74,10 @@ class RegisterActivity : AppCompatActivity() {
             //Complete and destroy login activity once successful
         })
 
-        tanggalLahir.setOnClickListener {
-            showDatePickerDialog()
-        }
-
         username.afterTextChanged {
             authViewModel.registerDataChanged(
                 username.text.toString(),
                 email.text.toString(),
-                tanggalLahir.text.toString(),
                 password.text.toString(),
                 konfirmasiPassword.text.toString()
             )
@@ -94,7 +88,6 @@ class RegisterActivity : AppCompatActivity() {
                 authViewModel.registerDataChanged(
                     username.text.toString(),
                     email.text.toString(),
-                    tanggalLahir.text.toString(),
                     password.text.toString(),
                     konfirmasiPassword.text.toString()
                 )
@@ -106,7 +99,6 @@ class RegisterActivity : AppCompatActivity() {
                         authViewModel.register(
                             username.text.toString(),
                             email.text.toString(),
-                            tanggalLahir.text.toString(),
                             password.text.toString(),
                             konfirmasiPassword.text.toString()
                         )
@@ -120,7 +112,6 @@ class RegisterActivity : AppCompatActivity() {
             authViewModel.register(
                 username.text.toString(),
                 email.text.toString(),
-                tanggalLahir.text.toString(),
                 password.text.toString(),
                 konfirmasiPassword.text.toString())
         }
@@ -131,26 +122,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     //kalender
-    private fun showDatePickerDialog() {
-        val calendar = java.util.Calendar.getInstance()
-        val year = calendar.get(java.util.Calendar.YEAR)
-        val month = calendar.get(java.util.Calendar.MONTH)
-        val day = calendar.get(java.util.Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = android.app.DatePickerDialog(
-            this,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                // Format tanggal yang nya (DD/MM/YYYY)
-                val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.editTextTanggalLahir.setText(date)
-
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
 
     //menuju ke halaman home
     private fun registerHome(displayName : String){
