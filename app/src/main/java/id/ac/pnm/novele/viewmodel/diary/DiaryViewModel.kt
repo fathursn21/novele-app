@@ -15,10 +15,8 @@ import id.ac.pnm.novele.data.repository.diary.DiaryRepository
 class DiaryViewModel : ViewModel() {
     private val _diaryData = MutableLiveData<List<DiaryData>>()
     val diaryData: LiveData<List<DiaryData>> = _diaryData
-
     private val _chapterDiaryData = MutableLiveData<List<DiaryChapterData>>()
     val diaryChapterData = _chapterDiaryData
-
     val diaryRepository: DiaryRepository = DiaryRepository()
     val diaryChapterRepository : DiaryChapterRepository = DiaryChapterRepository()
 
@@ -27,20 +25,6 @@ class DiaryViewModel : ViewModel() {
             val diaryResult = diaryRepository.fetchDiaryData()
             _diaryData.postValue((diaryResult))
         }
-    }
-
-    fun addDiary(title: String, penulis :String, sinopsis : String){
-        val newDiary = DiaryData(
-            System.currentTimeMillis().toString(),
-            R.drawable.ic_launcher_background,
-            title,
-            penulis,
-            emptyList(),
-            sinopsis
-        )
-
-        diaryRepository.addDiary(newDiary)
-        _diaryData.postValue(diaryRepository.fetchDiaryData())
     }
 
     fun getChapterDiaryData(idDiary: String) {

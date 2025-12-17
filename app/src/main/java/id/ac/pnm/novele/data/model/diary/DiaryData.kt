@@ -1,6 +1,5 @@
 package id.ac.pnm.novele.data.model.diary
 
-import id.ac.pnm.novele.data.model.novel.Genre
 
 data class DiaryData(
     var id : String,

@@ -6,6 +6,7 @@ import id.ac.pnm.novele.data.model.novel.Genre
 import id.ac.pnm.novele.data.model.novel.NovelData
 
 class NovelRepository {
+    // variabel allNovels diinisiakan setelah onCreateView
     private lateinit var _allNovels: List<NovelData>
     fun fetchNovelData(): List<NovelData> {
         val chaptersNovelId1 = listOf(

@@ -28,7 +28,7 @@ class DetailChapterAdapter() :
         //pake itemView buat akses ke view nya langsung mirip kyk kontruktor view di kelas NovelViewHolder
         fun bind(chapterNovel: ChapterData) {
                 textViewNovelChapter.text =
-                    itemView.context.getString(R.string.chapter, chapterNovel.chapter)
+                    itemView.context.getString(R.string.chapter, chapterNovel.idChapter)
                 textViewWaktuChapter.text = itemView.context.getString(R.string.jam, chapterNovel.waktu)
                 textViewJudulChapter.text = chapterNovel.title
 
@@ -86,7 +86,7 @@ class DetailChapterAdapter() :
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             val itemLama = daftarLama[oldItemPosition]
             val itemBaru = daftarBaru[newItemPosition]
-            val cekItemSama = itemLama.chapter == itemBaru.chapter
+            val cekItemSama = itemLama.idChapter == itemBaru.idChapter
             return cekItemSama
         }
 

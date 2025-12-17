@@ -84,7 +84,6 @@ class DetailDiaryFragment : Fragment() {
         }
 
         diaryViewModel.diaryChapterData.observe(viewLifecycleOwner) { lisChapterDiary ->
-            Log.d("DetailDiary", "chapter size = ${lisChapterDiary.size}")
             diaryChapterAdapter.updateData(lisChapterDiary)
 
             // update jumlah chapter setiap kali data berubah
@@ -108,7 +107,6 @@ class DetailDiaryFragment : Fragment() {
                 startActivity(intent)
             }
 
-            // first load
             diaryViewModel.getChapterDiaryData(id)
         }
 

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.view.DetailActivity
 import id.ac.pnm.novele.view.HomeActivity
@@ -25,8 +26,7 @@ class ProfileFragment : Fragment() {
     private var displayName: String? = null
     private lateinit var textViewDisplayName: TextView
     private lateinit var layoutLogout: LinearLayout
-    private lateinit var layoutFavorit: LinearLayout
-    private lateinit var layoutHistory: LinearLayout
+    private lateinit var layoutDiary: LinearLayout
     private lateinit var authViewModel: AuthViewModel
     private lateinit var novelViewModel: NovelViewModel
 
@@ -52,8 +52,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         layoutLogout = view.findViewById(R.id.layoutLogout)
-        layoutFavorit = view.findViewById(R.id.layoutFavorit)
-        layoutHistory = view.findViewById(R.id.layoutHistory)
+        layoutDiary = view.findViewById(R.id.layoutNovelAnda)
         textViewDisplayName = view.findViewById(R.id.textViewDisplayName)
         recyclerViewHistoryHorizontal = view.findViewById(R.id.recyclerViewHistoryHorizontal)
         return view
@@ -67,6 +66,10 @@ class ProfileFragment : Fragment() {
         //pindah ke halaman login
         layoutLogout.setOnClickListener {
             logout()
+        }
+        layoutDiary.setOnClickListener {
+            (requireActivity()).findViewById<BottomNavigationView>(R.id.bottom_nav)
+                .selectedItemId = R.id.diaryFragment
         }
 
         historyHorizontalAdapter = HistoryHorizontalAdapter{ id ->

@@ -13,45 +13,45 @@ class AuthDataSource(private val userDataSource: UserDataSource) {
     fun login(usernameEmail: String, password: String): Result<LoggedInUser> {
         try {
         //aku comment dulu biar mudah masuk ke home
-//            val user = if (usernameEmail.contains("@")){
-//                userDataSource.findUserByEmail(usernameEmail)
-//            } else{
-//                userDataSource.findUserByUsername(usernameEmail)
-//            }
-//            // TODO: handle loggedInUser authentication
-//            return if (user != null && user.password == password ){
-//                Result.Success(user)
-//            }else{
-//                Result.Error(IOException("Username atau password salah."))
+            val user = if (usernameEmail.contains("@")){
+                userDataSource.findUserByEmail(usernameEmail)
+            } else{
+                userDataSource.findUserByUsername(usernameEmail)
+            }
+            // TODO: handle loggedInUser authentication
+            return if (user != null && user.password == password ){
+                Result.Success(user)
+            }else {
+                Result.Error(IOException("Username atau password salah."))
+            }
             //pakai fake user dulu
-            val fakeUser = LoggedInUser("","", "","","")
-            return Result.Success(fakeUser)
+//            val fakeUser = LoggedInUser("","", "","","")
+//            return Result.Success(fakeUser)
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }
     }
     //handle register yang nentuin sukses atau engganya
-    fun register(username: String, email: String, tanggalLahir: String, password: String): Result<LoggedInUser> {
+    fun register(username: String, email: String,  password: String, konfirmasiPassword : String): Result<LoggedInUser> {
         try {
             if (userDataSource.isUsernameRegistered(username) || (userDataSource.isEmailRegistered(email))){
                 return Result.Error(IOException("Username atau email sudah terdaftar"))
             } else {
                 //aku comment dulu biar mudah masuk ke home
-//                if (password == konfirmasiPassword){
+                if (password == konfirmasiPassword){
                     val newUser = LoggedInUser(
                         userId = UUID.randomUUID().toString(),
                         displayName = username,
                         email = email,
-                        tanggalLahir = tanggalLahir,
                         password = password
                     )
                     userDataSource.saveUser(newUser)
-                    val user = LoggedInUser(UUID.randomUUID().toString(), username, email,tanggalLahir,password)
+                    val user = LoggedInUser(UUID.randomUUID().toString(), username, email,password)
                     return Result.Success(user)
-//                }
+                }
             }
             // TODO: handle loggedInUser authentication
-//            return Result.Error(IOException("Pendaftaran Gagal"))
+            return Result.Error(IOException("Pendaftaran Gagal"))
         } catch (e: Throwable) {
             return Result.Error(IOException("Error Pendaftaran Gagal", e))
         }

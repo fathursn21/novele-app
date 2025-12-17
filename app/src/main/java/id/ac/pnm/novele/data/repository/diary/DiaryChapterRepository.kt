@@ -30,12 +30,7 @@ class DiaryChapterRepository {
                 2
             ),
 
-
             )
-    }
-
-    fun fetchChapterDiaryData(): List<DiaryChapterData> {
-        return diaryChapterList
     }
 
     fun fetchChapterByDiaryId(idDiary: String): List<DiaryChapterData> {
@@ -46,12 +41,7 @@ class DiaryChapterRepository {
         diaryChapterList.add(0, diary)
     }
 
-    fun getChapterDiaryById(id: String): DiaryChapterData? {
-        return diaryChapterList.firstOrNull { it.idChapter == id }
-    }
-
     fun countChapterByDiaryId(idDiary: String): Int {
         return diaryChapterList.count { it.idDiary == idDiary }
     }
-
 }

@@ -12,7 +12,7 @@ data class NovelData(
 )
 
 data class ChapterData(
-    val chapter: Int,
+    val idChapter: Int,
     val title: String,
     val isi: String,
     val waktu: Int

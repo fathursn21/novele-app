@@ -72,7 +72,6 @@ class DiaryFragment : Fragment() {
 
         // set button listener to redirect to view add diary
         buttonAddDiary.setOnClickListener {
-            Log.d("DiaryFragment", "buttonAddDiary clicked")
             val intent = Intent(requireContext(), DiaryEditorActivity::class.java)
 
             intent.putExtra("is_edit", false)

@@ -1,9 +1,7 @@
 package id.ac.pnm.novele.data.repository.diary
 
-import android.util.Log
 import id.ac.pnm.novele.R
 import id.ac.pnm.novele.data.model.diary.DiaryData
-import id.ac.pnm.novele.data.model.novel.Genre
 
 class DiaryRepository {
 

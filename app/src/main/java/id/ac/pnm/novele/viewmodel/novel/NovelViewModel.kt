@@ -32,7 +32,7 @@ class NovelViewModel : ViewModel() {
     fun getNovelData() {
         if (_novelData.value.isNullOrEmpty()){
             val novelResult = novelRepository.fetchNovelData()
-            _novelData.postValue((novelResult))
+            _novelData.postValue(novelResult)
         }
     }
 
